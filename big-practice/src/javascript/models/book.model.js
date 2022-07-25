@@ -11,7 +11,7 @@ export class BookModel {
   async getBookList() {
     try {
       const bookList = await this.bookHelper.getRequest(`/books`);
-      localStorage.setItem('bookList', bookList);
+      localStorage.setItem('bookList', JSON.stringify(bookList));
       return bookList;
     } catch (error) {
       console.log(error);
