@@ -72,8 +72,8 @@ export class UpdateBookView {
   /**
    * Take the message to notice of updating book is failed 
    */
-  alertMess() {
-    alert('Update book failed!');
+  alertMess(str) {
+    alert(str);
   }
 
   /**
