@@ -38,7 +38,7 @@ export class CreateBookView {
   }
 
   /**
-   * Take the message to notice of updating book is failed 
+   * Take the message to notice of creating book is failed 
    */
   alertMess () {
     alert('Creating book failed!');
@@ -70,32 +70,47 @@ export class CreateBookView {
     this.createBookBtn.addEventListener('click', (event) => {
       event.preventDefault();
       if (this.bookName.value === '') {
-        this.bookNameMess.style.display = 'block';
+        this.bookNameMess.firstElementChild.style.display = 'block';
+      } else  if (this.bookName.value.length >= 30){
+        this.bookNameMess.firstElementChild.style.display = 'none';
+        this.bookNameMess.lastElementChild.style.display = 'block';
       } else {
-        this.bookNameMess.style.display = 'none';
+        this.bookNameMess.firstElementChild.style.display = 'none';
+        this.bookNameMess.lastElementChild.style.display = 'none';
       }
+
       if (this.author.value === '') {
-        this.authorMess.style.display = 'block';
+        this.authorMess.firstElementChild.style.display = 'block';
+      } else  if (this.author.value.length >= 30){
+        this.authorMess.firstElementChild.style.display = 'none';
+        this.authorMess.lastElementChild.style.display = 'block';
       } else {
-        this.authorMess.style.display = 'none';
+        this.authorMess.firstElementChild.style.display = 'none';
+        this.authorMess.lastElementChild.style.display = 'none';
       }
+
       if (this.coverLink.value === '') {
         this.coverLinkMess.style.display = 'block';
       } else {
         this.coverLinkMess.style.display = 'none';
-
       }
+
       if (this.category.value === '') {
         this.categoryMess.style.display = 'block';
       } else {
         this.categoryMess.style.display = 'none';
       }
+
       if (this.description.value === '') {
-        this.descriptionMess.style.display = 'block';
+        this.descriptionMess.firstElementChild.style.display = 'block';
+      } else  if (this.description.value.length >= 150){
+        this.descriptionMess.firstElementChild.style.display = 'none';
+        this.descriptionMess.lastElementChild.style.display = 'block';
       } else {
-        this.descriptionMess.style.display = 'none';
+        this.descriptionMess.firstElementChild.style.display = 'none';
+        this.descriptionMess.lastElementChild.style.display = 'none';
       }
-      if (this.bookName.value && this.author.value && this.coverLink.value && this.category.value && this.description.value) {
+      if (this.bookName.value && this.bookName.value.length < 30 && this.author.value && this.author.value.length < 30 && this.coverLink.value && this.category.value && this.description.value && this.description.value.length < 150) {
         const body = {
           name: this.bookName.value,
           author: this.author.value,

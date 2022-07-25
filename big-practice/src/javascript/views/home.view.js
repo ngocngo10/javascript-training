@@ -22,6 +22,7 @@ export class HomeView {
 
         const bookCover = document.createElement('td');
         const bookCoverLink = document.createElement('a');
+        bookCoverLink.classList.add('book-cover-link');
         const bookCoverImg = document.createElement('img');
         bookCoverImg.src = book.cover;
         bookCoverImg.alt = 'Book cover';

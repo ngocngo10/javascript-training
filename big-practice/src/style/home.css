@@ -73,9 +73,16 @@
   background: #f5f5f5;
 }
 
+.book-cover-link {
+  display: inline-block;
+  width: 55px;
+  height: 65px;
+}
+
 .book-cover {
   width: 55px;
   height: 65px;
+  object-fit: cover;
 }
 
 .modal-dialog-delete {
