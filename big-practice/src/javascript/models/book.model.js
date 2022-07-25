@@ -11,10 +11,11 @@ export class BookModel {
   async getBookList() {
     try {
       const bookList = await this.bookHelper.getRequest(`/books`);
+      localStorage.setItem('bookList', bookList);
       return bookList;
     } catch (error) {
       console.log(error);
-      return [];
+      return false;
     }
   }
 

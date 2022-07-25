@@ -21,7 +21,13 @@ export class HomeController {
    */
   async handleShowBooks() {
     const bookList = await this.bookModel.getBookList();
-    this.homeView.showBookList(bookList);
+    if (!bookList) {
+      this.homeView.alertMess('Get book list was failed!');
+    }
+
+    if (bookList.length) {
+      this.homeView.showBookList(bookList);
+    }
   }
 
   /**
@@ -35,7 +41,7 @@ export class HomeController {
     if (res) {
       this.homeView.removeBook(id);
     } else {
-      this.homeView.alertMess();
+      this.homeView.alertMess('Delete book was failed!');
     }
   }
 }
