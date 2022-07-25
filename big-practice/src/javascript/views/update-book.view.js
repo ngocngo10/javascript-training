@@ -20,8 +20,16 @@ export class UpdateBookView {
    * @returns {string} book id
    */
   getBookId() {
-    const bookId = window.location.search.replace('?id=', '');
-    return bookId;
+    const id = window.location.search.replace('?id=', '');
+    return id;
+  }
+
+  getBookById() {
+    const id = this.getBookId();
+    const bookList = JSON.parse(localStorage.getItem('bookList'));
+    console.log(bookList);
+    const book = bookList.find(book => book.id === id);
+    return book
   }
 
   /**
