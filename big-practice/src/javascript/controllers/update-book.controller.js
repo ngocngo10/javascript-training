@@ -28,10 +28,10 @@ export class UpdateBookController {
   }
 
   /**
-   * Get the id of book which is updated from the updating book view
+   * Get book which is updated from the updating book view
    * Show book information after call API ftom the book model
    */
-  async handleShowBook() {
+  handleShowBook() {
     const book = this.updateBookView.getBookById();  
     this.updateBookView.showBookById(book);
   }
