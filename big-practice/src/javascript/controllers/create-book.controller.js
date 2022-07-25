@@ -25,7 +25,7 @@ export class CreateBookController {
   async handleShowCategories() {
     const categories = await this.categoryModel.getAllCategories();
     if (!categories) this.alertMess('Get categories was failed.');
-    if (categories.length) this.createBookView.showCategories();
+    if (categories.length) this.createBookView.showCategories(categories);
   }
 
   /**
