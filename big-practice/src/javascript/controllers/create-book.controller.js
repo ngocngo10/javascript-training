@@ -24,7 +24,8 @@ export class CreateBookController {
    */
   async handleShowCategories() {
     const categories = await this.categoryModel.getAllCategories();
-    this.createBookView.showCategories(categories);
+    if (!categories) this.alertMess('Get categories was failed.');
+    if (categories.length) this.createBookView.showCategories(categories);
   }
 
   /**
@@ -33,12 +34,12 @@ export class CreateBookController {
    */
 
   async handleCreateBook(body) {
-    const res = await this.bookModel.creatBook(body);
+    const res = await this.bookModel.createBook(body);
     if (res) {
       this.createBookView.redirectHomePage();
     }
     else {
-      this.createBookView.alertMess();
+      this.createBookView.alertMess('Creating book was failed.');
     }
   }
 }
