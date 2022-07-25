@@ -73,9 +73,7 @@ export class BookHelper {
       },
       body: requestBody
     }
-    console.log('option', options);
-    console.log(API_HOST + endpoint);
-    const res = await fetch(process.env.  API_HOST + endpoint, options);
+    const res = await fetch(process.env.API_HOST + endpoint, options);
     console.log('res', res);
     if (!res.ok) {
       throw new Error(`An error has occured: ${res.status}`);

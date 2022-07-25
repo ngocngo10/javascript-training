@@ -45,7 +45,7 @@ export class UpdateBookController {
    * @param {string} bookId 
    */
   async handleUpdateBook(body, bookId) {
-    const res = this.bookModel.updateBook(body, bookId);
+    const res = await this.bookModel.updateBook(body, bookId);
     if (res) {
       this.updateBookView.redirectHomePage();
     } else {
