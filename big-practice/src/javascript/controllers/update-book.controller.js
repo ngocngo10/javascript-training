@@ -32,12 +32,17 @@ export class UpdateBookController {
    * Show book information after call API ftom the book model
    */
   handleShowBook() {
+<<<<<<< HEAD
     const book = this.updateBookView.getBookById();
     if (book) {
       this.updateBookView.showBookById(book);
     } else {
       this.updateBookView.alertMess('Not found book.');
     }
+=======
+    const book = this.updateBookView.getBookById();  
+    this.updateBookView.showBookById(book);
+>>>>>>> 7ec498d84b88c28d40b20996ef03a96f2a46ce2a
   }
 
   /**
