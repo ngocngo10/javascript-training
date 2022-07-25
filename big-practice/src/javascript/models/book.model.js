@@ -54,7 +54,7 @@ export class BookModel {
    * @param {object} body 
    * @returns {boolean}
    */
-  async creatBook(body) {
+  async createBook(body) {
     try {
       const res = await this.bookHelper.createRequest(`/books`, body);
       return true;

@@ -20,14 +20,12 @@ export class CreateBookView {
    * @param {array} categories 
    */
   showCategories(categories) {
-    if (categories.length) {
-      categories.forEach((category) => {
-        const categoryItem = document.createElement('option');
-        categoryItem.value = category.id;
-        categoryItem.innerText = category.categoryName;
-        this.category.appendChild(categoryItem);
-      })
-    }
+    categories.forEach((category) => {
+      const categoryItem = document.createElement('option');
+      categoryItem.value = category.id;
+      categoryItem.innerText = category.categoryName;
+      this.category.appendChild(categoryItem);
+    })
   }
 
   /**
@@ -40,8 +38,8 @@ export class CreateBookView {
   /**
    * Take the message to notice of creating book is failed 
    */
-  alertMess () {
-    alert('Creating book failed!');
+  alertMess(str) {
+    alert(str);
   }
 
   /**
@@ -71,7 +69,7 @@ export class CreateBookView {
       event.preventDefault();
       if (this.bookName.value === '') {
         this.bookNameMess.firstElementChild.style.display = 'block';
-      } else  if (this.bookName.value.length >= 30){
+      } else if (this.bookName.value.length >= 30) {
         this.bookNameMess.firstElementChild.style.display = 'none';
         this.bookNameMess.lastElementChild.style.display = 'block';
       } else {
@@ -81,7 +79,7 @@ export class CreateBookView {
 
       if (this.author.value === '') {
         this.authorMess.firstElementChild.style.display = 'block';
-      } else  if (this.author.value.length >= 30){
+      } else if (this.author.value.length >= 30) {
         this.authorMess.firstElementChild.style.display = 'none';
         this.authorMess.lastElementChild.style.display = 'block';
       } else {
@@ -103,7 +101,7 @@ export class CreateBookView {
 
       if (this.description.value === '') {
         this.descriptionMess.firstElementChild.style.display = 'block';
-      } else  if (this.description.value.length >= 150){
+      } else if (this.description.value.length >= 150) {
         this.descriptionMess.firstElementChild.style.display = 'none';
         this.descriptionMess.lastElementChild.style.display = 'block';
       } else {

@@ -14,7 +14,7 @@ export class CategoryModel {
       return categories;
     } catch (error) {
       console.log(error);
-      return [];
+      return false;
     }
   }
 }
