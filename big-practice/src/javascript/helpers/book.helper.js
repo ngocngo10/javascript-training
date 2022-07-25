@@ -1,4 +1,4 @@
-import { API_HOST } from "../utils/constant";
+require('dotenv').config();
 export class BookHelper {
   constructor() { }
 
@@ -14,7 +14,7 @@ export class BookHelper {
         'Content-Type': 'application/json',
       },
     }
-    const res = await fetch(API_HOST + endpoint, options);
+    const res = await fetch(process.env.API_HOST + endpoint, options);
     if (!res.ok) {
       throw new Error(`An error has occured: ${res.status}`);
     }
@@ -33,7 +33,7 @@ export class BookHelper {
         'Content-Type': 'application/json',
       }
     }
-    const res = await fetch(API_HOST + endpoint, options);
+    const res = await fetch(process.env.API_HOST + endpoint, options);
     if (!res.ok) {
       throw new Error(`An error has occured: ${res.status}`);
     }
@@ -53,7 +53,7 @@ export class BookHelper {
       },
       body: requestBody
     }
-    const res = await fetch(API_HOST + endpoint, options);
+    const res = await fetch(process.env.API_HOST + endpoint, options);
     if (!res.ok) {
       throw new Error(`An error has occured: ${res.status}`);
     }
@@ -75,7 +75,7 @@ export class BookHelper {
     }
     console.log('option', options);
     console.log(API_HOST + endpoint);
-    const res = await fetch(API_HOST + endpoint, options);
+    const res = await fetch(process.env.  API_HOST + endpoint, options);
     console.log('res', res);
     if (!res.ok) {
       throw new Error(`An error has occured: ${res.status}`);

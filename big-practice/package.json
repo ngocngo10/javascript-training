@@ -11,9 +11,13 @@
   "author": "Ngoc Ngo",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.6.2"
+    "os-browserify": "^0.3.0",
+    "parcel": "^2.6.2",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10"
   },
   "dependencies": {
+    "dotenv": "^16.0.1",
     "serve": "^14.0.1"
   }
 }
