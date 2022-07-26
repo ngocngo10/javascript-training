@@ -69,7 +69,7 @@ export class CreateBookView {
       event.preventDefault();
       if (this.bookName.value === '') {
         this.bookNameMess.firstElementChild.style.display = 'block';
-      } else if (this.bookName.value.length >= 30) {
+      } else if (this.bookName.value.length >= 50) {
         this.bookNameMess.firstElementChild.style.display = 'none';
         this.bookNameMess.lastElementChild.style.display = 'block';
       } else {
@@ -79,7 +79,7 @@ export class CreateBookView {
 
       if (this.author.value === '') {
         this.authorMess.firstElementChild.style.display = 'block';
-      } else if (this.author.value.length >= 30) {
+      } else if (this.author.value.length >= 50) {
         this.authorMess.firstElementChild.style.display = 'none';
         this.authorMess.lastElementChild.style.display = 'block';
       } else {
@@ -108,7 +108,8 @@ export class CreateBookView {
         this.descriptionMess.firstElementChild.style.display = 'none';
         this.descriptionMess.lastElementChild.style.display = 'none';
       }
-      if (this.bookName.value && this.bookName.value.length < 30 && this.author.value && this.author.value.length < 30 && this.coverLink.value && this.category.value && this.description.value && this.description.value.length < 500) {
+
+      if (this.bookName.value && this.bookName.value.length < 50 && this.author.value && this.author.value.length < 50 && this.coverLink.value && this.category.value && this.description.value && this.description.value.length < 500) {
         const body = {
           name: this.bookName.value,
           author: this.author.value,
