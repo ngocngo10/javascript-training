@@ -49,10 +49,10 @@ git clone https://github.com/ngothingoc10/javascript-training.git
 cd javascript-training
 ```
 
-- Checkout branch `develop`
+- Checkout branch `big-practice`
 
 ```
-git checkout develop
+git checkout big-practice
 ```
 
 - Change directory to `big-practice` folder
