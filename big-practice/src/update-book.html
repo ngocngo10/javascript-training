@@ -17,7 +17,7 @@
       <h1>
         <a href="javascript:void(0)" class="header__logo">
           <img src="./assets/images/logo.svg" alt="Logo" class="logo__image">
-          <span class="logo__text">Creating Book</span>
+          <span class="logo__text">Book Management</span>
         </a>
       </h1>
     </div>
@@ -77,17 +77,19 @@
                   </div>
                   <div class="form-group">
                     <label for="description" class="form-label form-label--create">Desctiption</label>
-                    <textarea name="" id="description" class="form-control shadow-none form-control--create" rows="3"
+                    <textarea name="" id="description" class="form-control shadow-none form-control--create" rows="5"
                       placeholder="Please enter description of book"></textarea>
                     <div id="description-mess">
                       <p class="invalid-feedback">Please enter book description!</p>
-                      <p class="invalid-feedback">The book author must be less than 150 characters.</p>
+                      <p class="invalid-feedback">The book author must be less than 500 characters.</p>
                     </div>
                   </div>
-                  <div class="form-buttons">
-                    <button type="button" class="btn btn-danger" id="cancel-btn">Cancel</button>
-                    <button type="submit" class="btn btn-success" id="update-btn">Update</button>
-                  </div>
+                </div>
+              </div>
+              <div class="form-buttons">
+                <button type="button" class="btn btn-danger" id="cancel-btn">Cancel</button>
+                <button type="submit" class="btn btn-success" id="update-btn">Update</button>
+              </div>
             </form>
           </div>
   </main>

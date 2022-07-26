@@ -101,14 +101,14 @@ export class CreateBookView {
 
       if (this.description.value === '') {
         this.descriptionMess.firstElementChild.style.display = 'block';
-      } else if (this.description.value.length >= 150) {
+      } else if (this.description.value.length >= 500) {
         this.descriptionMess.firstElementChild.style.display = 'none';
         this.descriptionMess.lastElementChild.style.display = 'block';
       } else {
         this.descriptionMess.firstElementChild.style.display = 'none';
         this.descriptionMess.lastElementChild.style.display = 'none';
       }
-      if (this.bookName.value && this.bookName.value.length < 30 && this.author.value && this.author.value.length < 30 && this.coverLink.value && this.category.value && this.description.value && this.description.value.length < 150) {
+      if (this.bookName.value && this.bookName.value.length < 30 && this.author.value && this.author.value.length < 30 && this.coverLink.value && this.category.value && this.description.value && this.description.value.length < 500) {
         const body = {
           name: this.bookName.value,
           author: this.author.value,
