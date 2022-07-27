@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remove items from a dropdown list</title>
+</head>
+
+<body>
+  <form>
+    <select id="colorSelect">
+      <option>Red</option>
+      <option>Green</option>
+      <option>White</option>
+      <option>Black</option>
+    </select>
+    <input type="button" onclick="removeColor()" value="Select and Remove">
+  </form>
+  <script>
+    function removeColor() {
+      let select = document.getElementById('colorSelect');
+      console.log('select', select);
+      for (let i = 0; i < select.length; i++) {
+        const element = select[i];
+        console.log(element.value);
+        if (select.value === select[i].value) {
+          select.remove(i);
+        }
+        
+      }
+    }
+  </script>
+</body>
+
+</html>

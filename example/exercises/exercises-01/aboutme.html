@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .listitem {
+      color: red;
+    }
+
+    .bgr {
+      background-color: antiquewhite;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>About Me</h1>
+  <ul>
+    <li>Nickname: <span id="nickname"></span>
+    <li>Favorites: <span id="favorites"></span>
+    <li>Hometown: <span id="hometown"></span>
+  </ul>
+
+  <script>
+    document.body.style.fontFamily = 'Arial, sans-serif';
+    document.getElementById('nickname').textContent = 'ngocngo';
+    document.getElementById('favorites').textContent = 'play music';
+    document.getElementById('hometown').textContent = 'Quang Nam';
+    const items = document.querySelectorAll('li');
+    console.log('List element', items);
+    for (let i = 0; i < items.length; i++) {
+      items[i].className = 'listitem';
+      console.log('HIHI');
+    }
+    items.forEach((item) => {
+      console.log(item);
+      item.classList.add('bgr');
+    })
+    const myPic = document.createElement('img');
+    myPic.src = 'http://gotocon.com/dl/jaoo_aus2008/photos/speakers/Pamela_Fox.jpg';
+    document.body.appendChild(myPic);
+  </script>
+
+</body>
+
+</html>
