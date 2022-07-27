@@ -1,4 +1,4 @@
-import { BookHelper } from '../helpers/book.helper';
+import { BookHelper } from '../helpers/service.helper';
 export class BookModel {
   constructor() {
     this.bookHelper = new BookHelper();
