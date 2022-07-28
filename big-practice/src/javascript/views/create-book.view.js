@@ -60,6 +60,13 @@ export class CreateBookView {
     })
   }
 
+  isEmpty(value) {
+    if (!value) {
+      return true;
+    } 
+    return false;
+  }
+
   /**
    * Validate form and get the book information to creat book
    * @param {function} handleCreateBook 

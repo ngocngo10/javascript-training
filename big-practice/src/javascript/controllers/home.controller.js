@@ -3,6 +3,7 @@ export class HomeController {
     this.bookModel = bookModel;
     this.homeView = homeView;
     this.init();
+    console.log('Controller');
   }
 
   /**
@@ -21,6 +22,7 @@ export class HomeController {
    */
   async handleShowBooks() {
     const bookList = await this.bookModel.getBookList();
+    console.log('Show Book');
     if (!bookList) {
       this.homeView.alertMess('Get book list was failed!');
     }
