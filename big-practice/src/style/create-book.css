@@ -98,6 +98,6 @@
 .form-buttons {
   display: flex;
   justify-content: space-between;
-  width: 300px;
+  width: 200px;
   margin: 0 auto;
 }
