@@ -11,7 +11,7 @@ export class CreateBookController {
    * Attaching event handlers to specified elements on the create book page
    */
 
-  async init() {
+  init() {
     this.handleShowCategories();
     this.createBookView.bindCreateBook(this.handleCreateBook.bind(this));
     this.createBookView.bindShowImage();
