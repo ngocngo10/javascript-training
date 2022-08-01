@@ -3,7 +3,6 @@ export class HomeController {
     this.bookModel = bookModel;
     this.homeView = homeView;
     this.init();
-    console.log('Controller');
   }
 
   /**
@@ -21,15 +20,15 @@ export class HomeController {
    * Show all books to the home page
    */
   async handleShowBooks() {
-    console.log('Befor call Model');
-    const bookList = await this.bookModel.getBookList();
-    console.log('After call model');
-    if (!bookList) {
+    try {
+      const bookList = await this.bookModel.getBookList();
+      localStorage.setItem('bookList', JSON.stringify(bookList));
+      if (bookList.length) {
+        this.homeView.showBookList(bookList);
+      }
+    } catch (error) {
+      console.log(error.message);
       this.homeView.alertMess('Get book list was failed!');
-    }
-
-    if (bookList.length) {
-      this.homeView.showBookList(bookList);
     }
   }
 
@@ -40,10 +39,11 @@ export class HomeController {
    * @param {string} id 
    */
   async handleConfirmDeleteBook(id) {
-    const res = await this.bookModel.deleteBook(id);
-    if (res) {
+    try {
+      await this.bookModel.deleteBook(id);
       this.homeView.removeBook(id);
-    } else {
+    } catch (error) {
+      console.log(error.message);
       this.homeView.alertMess('Delete book was failed!');
     }
   }

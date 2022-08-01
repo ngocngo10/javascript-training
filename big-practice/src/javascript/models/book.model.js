@@ -3,20 +3,14 @@ export class BookModel {
   constructor() {
     this.bookHelper = new BookHelper();
   }
-  
+
   /**
    * Call to API from the book helper to get all books
    * @returns {array} book list
    */
   async getBookList() {
-    try {
-      const bookList = await this.bookHelper.getRequest(`/books`);
-      localStorage.setItem('bookList', JSON.stringify(bookList));
-      return bookList;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+    const bookList = await this.bookHelper.getRequest(`/books`);
+    return bookList;
   }
 
   /**
@@ -37,16 +31,9 @@ export class BookModel {
   /**
    * Use the id of book to call API from the book helper to delete that book.
    * @param {string} id 
-   * @returns {boolean}
    */
   async deleteBook(id) {
-    try {
-      const res = await this.bookHelper.deleteRequest(`/books/${id}`);
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+    await this.bookHelper.deleteRequest(`/book/${id}`);
   }
 
   /**
