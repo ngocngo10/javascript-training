@@ -18,7 +18,7 @@ export class BookModel {
    * @param {string} id 
    */
   async deleteBook(id) {
-    await this.bookHelper.deleteRequest(`/book/${id}`);
+    await this.bookHelper.deleteRequest(`/books/${id}`);
   }
 
   /**
