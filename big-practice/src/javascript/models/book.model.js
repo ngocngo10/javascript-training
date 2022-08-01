@@ -14,21 +14,6 @@ export class BookModel {
   }
 
   /**
-   * Use the id of book to call API from the book helper to get book information
-   * @param {string} bookId 
-   * @returns {boolean} 
-   */
-  async getBookById(bookId) {
-    try {
-      const book = await this.bookHelper.getRequest(`/books/${bookId}`);
-      return book;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
-
-  /**
    * Use the id of book to call API from the book helper to delete that book.
    * @param {string} id 
    */
@@ -52,12 +37,6 @@ export class BookModel {
    * @returns {boolean}
    */
   async updateBook(body, bookId) {
-    try {
-      const res = await this.bookHelper.updateRequest(`/books/${bookId}`, body);
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+    await this.bookHelper.updateRequest(`/books/${bookId}`, body);
   }
 }

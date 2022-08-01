@@ -10,7 +10,7 @@ export class UpdateBookController {
    * Show categories and book which is updated after call API
    * Attaching event handlers to specified elements on the updating book page
    */
-   init() {
+  async init() {
     this.handleShowCategories();
     this.handleShowBook();
     this.updateBookView.bindCancelUpdateBook();
@@ -33,14 +33,13 @@ export class UpdateBookController {
   }
 
   /**
-   * Get book which is updated from the updating book view
-   * Show book information after call API ftom the book model
+   * Show book information
    */
   handleShowBook() {
-    try {
-      const book = this.updateBookView.getBookById();
+    const book = this.updateBookView.getBookById();
+    if (book) {
       this.updateBookView.showBookById(book);
-    } catch (error) {
+    } else {
       this.updateBookView.alertMess('Not found book.');
     }
   }
@@ -53,10 +52,11 @@ export class UpdateBookController {
    * @param {string} bookId 
    */
   async handleUpdateBook(body, bookId) {
-    const res = await this.bookModel.updateBook(body, bookId);
-    if (res) {
+    try {
+      await this.bookModel.updateBook(body, bookId);
       this.updateBookView.redirectHomePage();
-    } else {
+    } catch (error) {
+      console.log(error.message);
       this.updateBookView.alertMess('Update book failed!');
     }
   }
