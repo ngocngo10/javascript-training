@@ -9,12 +9,7 @@ export class CategoryModel {
    * @returns {array} categories
    */
   async getAllCategories() {
-    try {
-      const categories = await this.bookHelper.getRequest(`/categories`);
-      return categories;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+    const categories = await this.bookHelper.getRequest(`/categories`);
+    return categories;
   }
 }
