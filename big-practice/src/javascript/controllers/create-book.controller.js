@@ -38,11 +38,11 @@ export class CreateBookController {
    */
 
   async handleCreateBook(body) {
-    const res = await this.bookModel.createBook(body);
-    if (res) {
+    try {
+      await this.bookModel.createBook(body);
       this.createBookView.redirectHomePage();
-    }
-    else {
+    } catch (error) {
+      console.log(error.message);
       this.createBookView.alertMess('Creating book was failed.');
     }
   }

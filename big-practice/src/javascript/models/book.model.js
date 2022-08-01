@@ -42,13 +42,7 @@ export class BookModel {
    * @returns {boolean}
    */
   async createBook(body) {
-    try {
-      const res = await this.bookHelper.createRequest(`/books`, body);
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+    await this.bookHelper.createRequest(`/books`, body);
   }
 
   /**
