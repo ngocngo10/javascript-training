@@ -45,44 +45,45 @@
                     <label for="book-name" class="form-label form-label--create">Book name</label>
                     <input type="text" class="form-control shadow-none form-control--create" id="book-name"
                       placeholder="Please enter book name" required>
-                    <div id="book-name-mess">
-                      <p class="invalid-feedback">Please enter book name!</p>
-                      <p class="invalid-feedback">The book name must be less than 50 characters.</p>
+                      <div  id="book-name-mess">
+                        <p class="invalid-feedback">Please enter book name!</p>
+                        <p class="invalid-feedback">The name must be more than 1 characters and less than 50 characters.</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="author" class="form-label form-label--create">Author</label>
-                    <input type="text" class="form-control shadow-none form-control--create" id="author"
-                      placeholder="Please enter author of book" required>
-                    <div id="author-mess">
-                      <p class="invalid-feedback">Please enter book author!</p>
-                      <p class="invalid-feedback">The book author must be less than 50 characters.</p>
+                    <div class="form-group">
+                      <label for="author" class="form-label form-label--create">Author</label>
+                      <input type="text" class="form-control shadow-none form-control--create" id="author"
+                        placeholder="Please enter author of book" required>
+                      <div id="author-mess">
+                        <p class="invalid-feedback">Please enter book author!</p>
+                        <p class="invalid-feedback">The author must be more than 1 characters and less than 50 characters.</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="cover-link" class="form-label form-label--create">Book cover link</label>
-                    <input type="text" class="form-control shadow-none form-control--create" id="cover-link"
-                      placeholder="Please enter author of book" required>
-                    <div class="invalid-feedback" id="cover-link-mess">
-                      Please enter cover book link!
+                    <div class="form-group">
+                      <label for="cover-link" class="form-label form-label--create">Book cover link</label>
+                      <input type="text" class="form-control shadow-none form-control--create" id="cover-link"
+                        placeholder="Please enter author of book" required>
+                        <div id="cover-link-mess">
+                          <p class="invalid-feedback">Please enter cover link!</p>
+                          <p class="invalid-feedback">The book cover image url is invalid.</p>
+                        </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="category" class="form-label form-label--create">Category</label>
-                    <select class="form-select form-select--create" id="category">
-                    </select>
-                    <div class="invalid-feedback" id="category-mess">
-                      Please choose category of book!
+                    <div class="form-group">
+                      <label for="category" class="form-label form-label--create">Category</label>
+                      <select class="form-select form-select--create" id="category">
+                      </select>
+                      <div id="category-mess">
+                        <p class="invalid-feedback">Please enter category!</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="description" class="form-label form-label--create">Desctiption</label>
-                    <textarea name="" id="description" class="form-control shadow-none form-control--create" rows="5"
-                      placeholder="Please enter description of book"></textarea>
-                    <div id="description-mess">
-                      <p class="invalid-feedback">Please enter book description!</p>
-                      <p class="invalid-feedback">The book author must be less than 500 characters.</p>
-                    </div>
+                    <div class="form-group">
+                      <label for="description" class="form-label form-label--create">Desctiption</label>
+                      <textarea name="" id="description" class="form-control shadow-none form-control--create" rows="5"
+                        placeholder="Please enter description of book"></textarea>
+                      <div  id="description-mess">
+                        <p class="invalid-feedback">Please enter book description!</p>
+                        <p class="invalid-feedback">The description must be more than 10 characters and less than 500 characters.</p>
+                      </div>
                   </div>
                 </div>
               </div>

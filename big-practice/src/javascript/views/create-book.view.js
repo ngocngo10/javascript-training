@@ -1,3 +1,5 @@
+import constants from '../../utils/constants'
+
 export class CreateBookView {
   constructor() {
     this.createBookBtn = document.getElementById('create-btn');
@@ -60,12 +62,117 @@ export class CreateBookView {
     })
   }
 
-  isEmpty(value) {
-    if (!value) {
-      return true;
-    } 
-    return false;
+  isNotEmptyText(str) {
+    return constants.notEmptyStringPattern.test(str)
   }
+
+  isFormatText(str) {
+    return constants.textLengthPattern.test(str)
+  }
+
+  isFormatLargeText(str) {
+    return constants.largeTextlengthPattern.test(str)
+  }
+
+  isImageURL(str) {
+    return constants.imageUrlPattern.test(str)
+  }
+
+  showEmptyErrorMess(messElement) {
+    messElement.firstElementChild.style.display = 'block';
+    messElement.lastElementChild.style.display = 'none';
+  }
+
+  showUnformatErrorMess(messElement) {
+    messElement.firstElementChild.style.display = 'none';
+    messElement.lastElementChild.style.display = 'block';
+  }
+
+  hideErrorMess(messElement) {
+    messElement.firstElementChild.style.display = 'none';
+    messElement.lastElementChild.style.display = 'none';
+  }
+
+  isValidName(bookName, nameMessEle) {
+    if (!this.isNotEmptyText(bookName)) {
+      this.showEmptyErrorMess(nameMessEle);
+      return false;
+    } else if (!this.isFormatText(bookName)) {
+      this.showUnformatErrorMess(nameMessEle);
+      return false;
+    } else {
+      this.hideErrorMess(nameMessEle);
+      return true;
+    }
+  }
+
+  isValidAuthor(author, authorMessEle) {
+    if (!this.isNotEmptyText(author)) {
+      this.showEmptyErrorMess(authorMessEle);
+      return false;
+    } else if (!this.isFormatText(author)) {
+      this.showUnformatErrorMess(authorMessEle);
+      return false;
+    } else {
+      this.hideErrorMess(authorMessEle);
+      return true;
+    }
+  }
+
+  isValidCoverLink(coverLink, coverMessEle) {
+    if (!this.isNotEmptyText(coverLink)) {
+      this.showEmptyErrorMess(coverMessEle);
+      return false;
+    } else if (!this.isImageURL(coverLink)) {
+      this.showUnformatErrorMess(coverMessEle);
+      return false;
+    } else {
+      this.hideErrorMess(coverMessEle);
+      return true;
+    }
+  }
+
+  isValidCategory(category, categoryMessElement) {
+    if (!this.isNotEmptyText(category)) {
+      this.showEmptyErrorMess(categoryMessElement);
+      return false;
+    } else {
+      this.hideErrorMess(categoryMessElement);
+      return true;
+    }
+  }
+
+  isValidDescription(description, descMessEle) {
+    if (!this.isNotEmptyText(description)) {
+      this.showEmptyErrorMess(descMessEle);
+      return false;
+    } else if (!this.isFormatLargeText(description)) {
+      this.showUnformatErrorMess(descMessEle);
+      return false;
+    } else {
+      this.hideErrorMess(descMessEle);
+      return true;
+    }
+  }
+
+  isValidForm() {
+    const bookName = this.bookName.value;
+    const author = this.author.value;
+    const coverLink = this.coverLink.value;
+    const category = this.category.value;
+    const description = this.description.value;
+
+    const isValidName = this.isValidName(bookName, this.bookNameMess);
+    const isValidAuthor = this.isValidAuthor(author, this.authorMess);
+    const isValidCoverLink = this.isValidCoverLink(coverLink, this.coverLinkMess);
+    const isValidCategory = this.isValidCategory(category, this.categoryMess);
+    const isValidDescription = this.isValidDescription(description, this.descriptionMess);
+
+    const isValid = isValidName && isValidAuthor && isValidCoverLink && isValidCategory && isValidDescription;
+
+    return isValid;
+  }
+
 
   /**
    * Validate form and get the book information to creat book
@@ -74,53 +181,12 @@ export class CreateBookView {
   bindCreateBook(handleCreateBook) {
     this.createBookBtn.addEventListener('click', (event) => {
       event.preventDefault();
-      if (this.bookName.value === '') {
-        this.bookNameMess.firstElementChild.style.display = 'block';
-      } else if (this.bookName.value.length >= 50) {
-        this.bookNameMess.firstElementChild.style.display = 'none';
-        this.bookNameMess.lastElementChild.style.display = 'block';
-      } else {
-        this.bookNameMess.firstElementChild.style.display = 'none';
-        this.bookNameMess.lastElementChild.style.display = 'none';
-      }
-
-      if (this.author.value === '') {
-        this.authorMess.firstElementChild.style.display = 'block';
-      } else if (this.author.value.length >= 50) {
-        this.authorMess.firstElementChild.style.display = 'none';
-        this.authorMess.lastElementChild.style.display = 'block';
-      } else {
-        this.authorMess.firstElementChild.style.display = 'none';
-        this.authorMess.lastElementChild.style.display = 'none';
-      }
-
-      if (this.coverLink.value === '') {
-        this.coverLinkMess.style.display = 'block';
-      } else {
-        this.coverLinkMess.style.display = 'none';
-      }
-
-      if (this.category.value === '') {
-        this.categoryMess.style.display = 'block';
-      } else {
-        this.categoryMess.style.display = 'none';
-      }
-
-      if (this.description.value === '') {
-        this.descriptionMess.firstElementChild.style.display = 'block';
-      } else if (this.description.value.length >= 500) {
-        this.descriptionMess.firstElementChild.style.display = 'none';
-        this.descriptionMess.lastElementChild.style.display = 'block';
-      } else {
-        this.descriptionMess.firstElementChild.style.display = 'none';
-        this.descriptionMess.lastElementChild.style.display = 'none';
-      }
-      if (this.bookName.value && this.bookName.value.length < 50 && this.author.value && this.author.value.length < 50 && this.coverLink.value && this.category.value && this.description.value && this.description.value.length < 500) {
+      if (this.isValidForm()) {
         const body = {
           name: this.bookName.value,
           author: this.author.value,
           cover: this.coverLink.value,
-          category: parseInt(this.category.value),
+          category: this.category.value,
           description: this.description.value
         }
         handleCreateBook(body);

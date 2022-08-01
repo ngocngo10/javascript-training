@@ -10,7 +10,7 @@ export class HomeController {
   * Show book list after call API
   * Attaching event handlers to specified elements on the home page
   */
-  async init() {
+  init() {
     this.handleShowBooks();
     this.homeView.bindBookActions();
     this.homeView.bindConfirmDeleteBook(this.handleConfirmDeleteBook.bind(this));
@@ -21,8 +21,9 @@ export class HomeController {
    * Show all books to the home page
    */
   async handleShowBooks() {
+    console.log('Befor call Model');
     const bookList = await this.bookModel.getBookList();
-    console.log('Show Book');
+    console.log('After call model');
     if (!bookList) {
       this.homeView.alertMess('Get book list was failed!');
     }
