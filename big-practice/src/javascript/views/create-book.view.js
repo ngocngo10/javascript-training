@@ -116,6 +116,7 @@ export class CreateBookView {
    * @returns {boolean}
    */
   isValidName(bookName, nameMessEle) {
+    console.log('d', this.isFormatText(bookName), bookName);
     if (!this.isNotEmptyText(bookName)) {
       this.showEmptyErrorMess(nameMessEle);
       return false;
@@ -232,19 +233,22 @@ export class CreateBookView {
 
     this.formContentRight.addEventListener('keyup', (event) => {
       if (event.target.id === 'book-name') {
-        this.isValidName(bookName, this.bookNameMess);
+        this.isValidName(this.bookName.value, this.bookNameMess);
       }
       if (event.target.id === 'author') {
-        this.isValidName(author, this.authorMess);
+        this.isValidName(this.author.value, this.authorMess);
       }
       if (event.target.id === 'cover-link') {
-        const isValid = this.isValidName(coverLink, this.coverLinkMess);
+        const isValid = this.isValidCoverLink(this.coverLink.value, this.coverLinkMess);
         if (isValid) {
           this.coverImage.src = this.coverLink.value;
+        } else {
+          const defaultCoverImage = require('../../assets/images/cover-image.png');
+          this.coverImage.src = defaultCoverImage;
         }
       }
       if (event.target.id === 'description') {
-        this.isValidDescription(description, this.descriptionMess);
+        this.isValidDescription(this.description.value, this.descriptionMess);
       }
 
     })
