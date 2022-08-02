@@ -10,7 +10,6 @@ export class CreateBookController {
    * Show categories after call API
    * Attaching event handlers to specified elements on the create book page
    */
-
   init() {
     this.handleShowCategories();
     this.createBookView.bindCreateBook(this.handleCreateBook.bind(this));
@@ -36,7 +35,6 @@ export class CreateBookController {
    * Use body from the creating book view to call the book model for create book
    * @param {object} body 
    */
-
   async handleCreateBook(body) {
     try {
       await this.bookModel.createBook(body);

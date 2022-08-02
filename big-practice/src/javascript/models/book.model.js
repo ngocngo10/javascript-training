@@ -1,4 +1,5 @@
 import { BookHelper } from '../helpers/service.helper';
+
 export class BookModel {
   constructor() {
     this.bookHelper = new BookHelper();
@@ -24,7 +25,6 @@ export class BookModel {
   /**
    * Use the book information of body to call API from the book helper to create the new book
    * @param {object} body 
-   * @returns {boolean}
    */
   async createBook(body) {
     await this.bookHelper.createRequest(`/books`, body);
@@ -34,9 +34,9 @@ export class BookModel {
    * Use the book information of body and the book id to call API from the book helper to update that book
    * @param {object} body 
    * @param {string} bookId 
-   * @returns {boolean}
    */
   async updateBook(body, bookId) {
     await this.bookHelper.updateRequest(`/books/${bookId}`, body);
   }
+  
 }

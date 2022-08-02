@@ -1,4 +1,4 @@
-import constants from '../../utils/constants'
+import constants from '../../utils/constants';
 
 export class UpdateBookView {
   constructor() {
@@ -26,6 +26,9 @@ export class UpdateBookView {
     return id;
   }
 
+  /**
+   * Get the book information from the id of book
+   */
   getBookById() {
     const id = this.getBookId();
     const bookList = JSON.parse(localStorage.getItem('bookList'));
@@ -95,37 +98,75 @@ export class UpdateBookView {
     })
   }
 
+  /**
+   * Check if a string is not empty
+   * @param {string} str 
+   * @returns {boolean}
+   */
   isNotEmptyText(str) {
     return constants.notEmptyStringPattern.test(str)
   }
 
+  /**
+   * Check if a string in input element is formated
+   * @param {string} str 
+   * @returns {boolean}
+   */
   isFormatText(str) {
     return constants.textLengthPattern.test(str)
   }
 
+  /**
+   * Check if a string in textarea element is formated
+   * @param {string} str 
+   * @returns {boolean}
+   */
   isFormatLargeText(str) {
     return constants.largeTextlengthPattern.test(str)
   }
 
+  /**
+   * Check if a string is the image url
+   * @param {string} str 
+   * @returns {boolean}
+   */
   isImageURL(str) {
     return constants.imageUrlPattern.test(str)
   }
 
+  /**
+   * Show message when a string is empty
+   * @param {document object} messElement 
+   */
   showEmptyErrorMess(messElement) {
     messElement.firstElementChild.style.display = 'block';
     messElement.lastElementChild.style.display = 'none';
   }
 
+  /**
+   * Show message when a string is invalid
+   * @param {document object} messElement 
+   */
   showUnformatErrorMess(messElement) {
     messElement.firstElementChild.style.display = 'none';
     messElement.lastElementChild.style.display = 'block';
   }
 
+  /**
+   * Hide message when a string is valid
+   * @param {document object} messElement 
+   */
   hideErrorMess(messElement) {
     messElement.firstElementChild.style.display = 'none';
     messElement.lastElementChild.style.display = 'none';
   }
 
+  /**
+   * Validate for the book name
+   * @param {string} bookName 
+   * @param {document object} nameMessEle 
+   * @returns {boolean}
+   */
   isValidName(bookName, nameMessEle) {
     if (!this.isNotEmptyText(bookName)) {
       this.showEmptyErrorMess(nameMessEle);
@@ -139,6 +180,12 @@ export class UpdateBookView {
     }
   }
 
+  /**
+   * Validate for author of book
+   * @param {string} author 
+   * @param {document object} authorMessEle 
+   * @returns {boolean}
+   */
   isValidAuthor(author, authorMessEle) {
     if (!this.isNotEmptyText(author)) {
       this.showEmptyErrorMess(authorMessEle);
@@ -152,6 +199,12 @@ export class UpdateBookView {
     }
   }
 
+  /**
+   * Validate for the cover link
+   * @param {string} coverLink 
+   * @param {document object} coverMessEle 
+   * @returns {boolean}
+   */
   isValidCoverLink(coverLink, coverMessEle) {
     if (!this.isNotEmptyText(coverLink)) {
       this.showEmptyErrorMess(coverMessEle);
@@ -165,6 +218,12 @@ export class UpdateBookView {
     }
   }
 
+  /**
+   * Validate for the category of book
+   * @param {string} category 
+   * @param {document object} categoryMessElement 
+   * @returns {boolean}
+   */
   isValidCategory(category, categoryMessElement) {
     if (!this.isNotEmptyText(category)) {
       this.showEmptyErrorMess(categoryMessElement);
@@ -175,6 +234,12 @@ export class UpdateBookView {
     }
   }
 
+  /**
+   * Validate for the description of book
+   * @param {string} description 
+   * @param {document object} descMessEle 
+   * @returns {boolean}
+   */
   isValidDescription(description, descMessEle) {
     if (!this.isNotEmptyText(description)) {
       this.showEmptyErrorMess(descMessEle);
@@ -188,6 +253,10 @@ export class UpdateBookView {
     }
   }
 
+  /**
+   * Validate for the create book form
+   * @returns {boolean}
+   */
   isValidForm() {
     const bookName = this.bookName.value;
     const author = this.author.value;
@@ -208,7 +277,7 @@ export class UpdateBookView {
 
 
   /**
-   * Validate form and get the book information to creat book
+   * Validate form and get the book information to update book
    * @param {function} handleCreateBook 
    */
   bindUpdateBook(handleUpdateBook) {

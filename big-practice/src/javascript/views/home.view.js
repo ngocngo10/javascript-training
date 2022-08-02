@@ -52,10 +52,17 @@ export class HomeView {
     removedElement.remove();
   }
 
+  /**
+   * Take the message to notice ò actions is failed 
+   * @param {string} str 
+   */
   alertMess(str) {
     alert(str);
   }
 
+  /**
+   * Add event edit and delete book
+   */
   bindBookActions() {
     this.bookList.addEventListener('click', (event) => {
       if (event.target.className == 'delete-btn__img') {
@@ -68,6 +75,10 @@ export class HomeView {
     })
   }
 
+  /**
+   * Add event confirm deleting book
+   * @param {function} handleConfirmDeleteBook 
+   */
   bindConfirmDeleteBook(handleConfirmDeleteBook) {
     this.btnModalDelete.addEventListener('click', () => {
       const deletedBookId = this.btnModalDelete.dataset.id;
