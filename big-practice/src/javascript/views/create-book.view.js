@@ -15,6 +15,7 @@ export class CreateBookView {
     this.categoryMess = document.getElementById('category-mess');
     this.descriptionMess = document.getElementById('description-mess');
     this.coverImage = document.getElementById('cover-image');
+    this.formContentRight = document.getElementById('form-content-right');
   }
 
   /**
@@ -43,24 +44,6 @@ export class CreateBookView {
    */
   alertMess(str) {
     alert(str);
-  }
-
-  /**
-   * Show the book cover image when remove focus from the text input contains cover link
-   */
-  bindShowImage() {
-    this.coverLink.addEventListener('blur', () => {
-      this.coverImage.src = this.coverLink.value;
-    })
-  }
-
-  /**
-   * Redirect to the home page from the creating book page when click the cancel button
-   */
-  bindCancelCreateBook() {
-    this.cancelBtn.addEventListener('click', () => {
-      this.redirectHomePage();
-    })
   }
 
   /**
@@ -238,6 +221,51 @@ export class CreateBookView {
     const isValid = isValidName && isValidAuthor && isValidCoverLink && isValidCategory && isValidDescription;
 
     return isValid;
+  }
+
+  bindValidateFormField() {
+    const bookName = this.bookName.value;
+    const author = this.author.value;
+    const coverLink = this.coverLink.value;
+    const category = this.category.value;
+    const description = this.description.value;
+
+    this.formContentRight.addEventListener('keyup', (event) => {
+      if (event.target.id === 'book-name') {
+        this.isValidName(bookName, this.bookNameMess);
+      }
+      if (event.target.id === 'author') {
+        this.isValidName(author, this.authorMess);
+      }
+      if (event.target.id === 'cover-link') {
+        const isValid = this.isValidName(coverLink, this.coverLinkMess);
+        if (isValid) {
+          this.coverImage.src = this.coverLink.value;
+        }
+      }
+      if (event.target.id === 'description') {
+        this.isValidDescription(description, this.descriptionMess);
+      }
+
+    })
+  }
+
+  /**
+   * Show the book cover image when remove focus from the text input contains cover link
+   */
+  bindShowImage() {
+    this.coverLink.addEventListener('blur', () => {
+      this.coverImage.src = this.coverLink.value;
+    })
+  }
+
+  /**
+   * Redirect to the home page from the creating book page when click the cancel button
+   */
+  bindCancelCreateBook() {
+    this.cancelBtn.addEventListener('click', () => {
+      this.redirectHomePage();
+    })
   }
 
   /**
