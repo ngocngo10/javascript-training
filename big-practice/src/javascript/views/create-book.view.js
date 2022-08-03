@@ -111,12 +111,13 @@ export class CreateBookView {
 
   /**
    * Validate for the book name
-   * @param {string} bookName 
-   * @param {document object} nameMessEle 
    * @returns {boolean}
    */
-  isValidName(bookName, nameMessEle) {
-    console.log('d', this.isFormatText(bookName), bookName);
+  isValidName() {
+    const bookName = this.bookName.value;
+    const nameMessEle = this.bookNameMess;
+    console.log('this', this.bookNameMess);
+    console.log('name', this.bookName.value, this.bookNameMess);
     if (!this.isNotEmptyText(bookName)) {
       this.showEmptyErrorMess(nameMessEle);
       return false;
@@ -131,11 +132,11 @@ export class CreateBookView {
 
   /**
    * Validate for author of book
-   * @param {string} author 
-   * @param {document object} authorMessEle 
    * @returns {boolean}
    */
-  isValidAuthor(author, authorMessEle) {
+  isValidAuthor() {
+    const author = this.author.value;
+    const authorMessEle = this.authorMess;
     if (!this.isNotEmptyText(author)) {
       this.showEmptyErrorMess(authorMessEle);
       return false;
@@ -150,11 +151,11 @@ export class CreateBookView {
 
   /**
    * Validate for the cover link
-   * @param {string} coverLink 
-   * @param {document object} coverMessEle 
    * @returns {boolean}
    */
-  isValidCoverLink(coverLink, coverMessEle) {
+  isValidCoverLink() {
+    const coverLink = this.coverLink.value;
+    const coverMessEle = this.coverLinkMess;
     if (!this.isNotEmptyText(coverLink)) {
       this.showEmptyErrorMess(coverMessEle);
       return false;
@@ -169,11 +170,11 @@ export class CreateBookView {
 
   /**
    * Validate for the category of book
-   * @param {string} category 
-   * @param {document object} categoryMessElement 
    * @returns {boolean}
    */
-  isValidCategory(category, categoryMessElement) {
+  isValidCategory() {
+    const category = this.category.value;
+    const categoryMessElement = this.categoryMess;
     if (!this.isNotEmptyText(category)) {
       this.showEmptyErrorMess(categoryMessElement);
       return false;
@@ -185,11 +186,11 @@ export class CreateBookView {
 
   /**
    * Validate for the description of book
-   * @param {string} description 
-   * @param {document object} descMessEle 
    * @returns {boolean}
    */
-  isValidDescription(description, descMessEle) {
+  isValidDescription() {
+    const description = this.description.value;
+    const descMessEle = this.descriptionMess;
     if (!this.isNotEmptyText(description)) {
       this.showEmptyErrorMess(descMessEle);
       return false;
@@ -207,39 +208,27 @@ export class CreateBookView {
    * @returns {boolean}
    */
   isValidForm() {
-    const bookName = this.bookName.value;
-    const author = this.author.value;
-    const coverLink = this.coverLink.value;
-    const category = this.category.value;
-    const description = this.description.value;
-
-    const isValidName = this.isValidName(bookName, this.bookNameMess);
-    const isValidAuthor = this.isValidAuthor(author, this.authorMess);
-    const isValidCoverLink = this.isValidCoverLink(coverLink, this.coverLinkMess);
-    const isValidCategory = this.isValidCategory(category, this.categoryMess);
-    const isValidDescription = this.isValidDescription(description, this.descriptionMess);
+    const isValidName = this.isValidName();
+    const isValidAuthor = this.isValidAuthor();
+    const isValidCoverLink = this.isValidCoverLink();
+    const isValidCategory = this.isValidCategory();
+    const isValidDescription = this.isValidDescription();
 
     const isValid = isValidName && isValidAuthor && isValidCoverLink && isValidCategory && isValidDescription;
 
     return isValid;
   }
 
-  bindValidateFormField() {
-    const bookName = this.bookName.value;
-    const author = this.author.value;
-    const coverLink = this.coverLink.value;
-    const category = this.category.value;
-    const description = this.description.value;
-
+  bindValidateFormFields() {
     this.formContentRight.addEventListener('keyup', (event) => {
       if (event.target.id === 'book-name') {
-        this.isValidName(this.bookName.value, this.bookNameMess);
+        this.isValidName();
       }
       if (event.target.id === 'author') {
-        this.isValidName(this.author.value, this.authorMess);
+        this.isValidAuthor();
       }
       if (event.target.id === 'cover-link') {
-        const isValid = this.isValidCoverLink(this.coverLink.value, this.coverLinkMess);
+        const isValid = this.isValidCoverLink();
         if (isValid) {
           this.coverImage.src = this.coverLink.value;
         } else {
@@ -248,7 +237,7 @@ export class CreateBookView {
         }
       }
       if (event.target.id === 'description') {
-        this.isValidDescription(this.description.value, this.descriptionMess);
+        this.isValidDescription();
       }
 
     })
@@ -259,7 +248,13 @@ export class CreateBookView {
    */
   bindShowImage() {
     this.coverLink.addEventListener('blur', () => {
-      this.coverImage.src = this.coverLink.value;
+      if (this.isImageURL(this.coverLink.value)) {
+        this.coverImage.src = this.coverLink.value;
+      }
+      else {
+        const defaultCoverImage = require('../../assets/images/cover-image.png');
+        this.coverImage.src = defaultCoverImage;
+      }
     })
   }
 
@@ -288,6 +283,8 @@ export class CreateBookView {
           description: this.description.value
         }
         handleCreateBook(body);
+      } else {
+        this.bindValidateFormFields();
       }
     })
   }
