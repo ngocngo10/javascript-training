@@ -15,7 +15,6 @@ export class CreateBookController {
     this.createBookView.bindCreateBook(this.handleCreateBook.bind(this));
     this.createBookView.bindShowImage();
     this.createBookView.bindCancelCreateBook();
-    // this.createBookView.bindValidateFormFields();
   }
 
   /**

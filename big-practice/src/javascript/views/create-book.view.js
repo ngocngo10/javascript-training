@@ -116,8 +116,6 @@ export class CreateBookView {
   isValidName() {
     const bookName = this.bookName.value;
     const nameMessEle = this.bookNameMess;
-    console.log('this', this.bookNameMess);
-    console.log('name', this.bookName.value, this.bookNameMess);
     if (!this.isNotEmptyText(bookName)) {
       this.showEmptyErrorMess(nameMessEle);
       return false;

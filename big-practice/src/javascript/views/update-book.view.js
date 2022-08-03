@@ -15,6 +15,7 @@ export class UpdateBookView {
     this.categoryMess = document.getElementById('category-mess');
     this.descriptionMess = document.getElementById('description-mess');
     this.coverImage = document.getElementById('cover-image');
+    this.formContentRight = document.getElementById('form-content-right');
   }
 
   /**
@@ -81,28 +82,10 @@ export class UpdateBookView {
   }
 
   /**
-   * Show the book cover image when remove focus from the text input contains cover link
-   */
-  bindShowImage() {
-    this.coverLink.addEventListener('blur', () => {
-      this.coverImage.src = this.coverLink.value;
-    })
-  }
-
-  /**
-   * Redirect to the home page from the updating book page when click the cancel button
-   */
-  bindCancelUpdateBook() {
-    this.cancelBtn.addEventListener('click', () => {
-      this.redirectHomePage();
-    })
-  }
-
-  /**
-   * Check if a string is not empty
-   * @param {string} str 
-   * @returns {boolean}
-   */
+ * Check if a string is not empty
+ * @param {string} str 
+ * @returns {boolean}
+ */
   isNotEmptyText(str) {
     return constants.notEmptyStringPattern.test(str)
   }
@@ -163,11 +146,11 @@ export class UpdateBookView {
 
   /**
    * Validate for the book name
-   * @param {string} bookName 
-   * @param {document object} nameMessEle 
    * @returns {boolean}
    */
-  isValidName(bookName, nameMessEle) {
+  isValidName() {
+    const bookName = this.bookName.value;
+    const nameMessEle = this.bookNameMess;
     if (!this.isNotEmptyText(bookName)) {
       this.showEmptyErrorMess(nameMessEle);
       return false;
@@ -182,11 +165,11 @@ export class UpdateBookView {
 
   /**
    * Validate for author of book
-   * @param {string} author 
-   * @param {document object} authorMessEle 
    * @returns {boolean}
    */
-  isValidAuthor(author, authorMessEle) {
+  isValidAuthor() {
+    const author = this.author.value;
+    const authorMessEle = this.authorMess;
     if (!this.isNotEmptyText(author)) {
       this.showEmptyErrorMess(authorMessEle);
       return false;
@@ -201,11 +184,11 @@ export class UpdateBookView {
 
   /**
    * Validate for the cover link
-   * @param {string} coverLink 
-   * @param {document object} coverMessEle 
    * @returns {boolean}
    */
-  isValidCoverLink(coverLink, coverMessEle) {
+  isValidCoverLink() {
+    const coverLink = this.coverLink.value;
+    const coverMessEle = this.coverLinkMess;
     if (!this.isNotEmptyText(coverLink)) {
       this.showEmptyErrorMess(coverMessEle);
       return false;
@@ -220,11 +203,11 @@ export class UpdateBookView {
 
   /**
    * Validate for the category of book
-   * @param {string} category 
-   * @param {document object} categoryMessElement 
    * @returns {boolean}
    */
-  isValidCategory(category, categoryMessElement) {
+  isValidCategory() {
+    const category = this.category.value;
+    const categoryMessElement = this.categoryMess;
     if (!this.isNotEmptyText(category)) {
       this.showEmptyErrorMess(categoryMessElement);
       return false;
@@ -236,11 +219,11 @@ export class UpdateBookView {
 
   /**
    * Validate for the description of book
-   * @param {string} description 
-   * @param {document object} descMessEle 
    * @returns {boolean}
    */
-  isValidDescription(description, descMessEle) {
+  isValidDescription() {
+    const description = this.description.value;
+    const descMessEle = this.descriptionMess;
     if (!this.isNotEmptyText(description)) {
       this.showEmptyErrorMess(descMessEle);
       return false;
@@ -258,23 +241,66 @@ export class UpdateBookView {
    * @returns {boolean}
    */
   isValidForm() {
-    const bookName = this.bookName.value;
-    const author = this.author.value;
-    const coverLink = this.coverLink.value;
-    const category = this.category.value;
-    const description = this.description.value;
-
-    const isValidName = this.isValidName(bookName, this.bookNameMess);
-    const isValidAuthor = this.isValidAuthor(author, this.authorMess);
-    const isValidCoverLink = this.isValidCoverLink(coverLink, this.coverLinkMess);
-    const isValidCategory = this.isValidCategory(category, this.categoryMess);
-    const isValidDescription = this.isValidDescription(description, this.descriptionMess);
+    const isValidName = this.isValidName();
+    const isValidAuthor = this.isValidAuthor();
+    const isValidCoverLink = this.isValidCoverLink();
+    const isValidCategory = this.isValidCategory();
+    const isValidDescription = this.isValidDescription();
 
     const isValid = isValidName && isValidAuthor && isValidCoverLink && isValidCategory && isValidDescription;
 
     return isValid;
   }
 
+  bindValidateFormFields() {
+    this.formContentRight.addEventListener('keyup', (event) => {
+      if (event.target.id === 'book-name') {
+        this.isValidName();
+      }
+      if (event.target.id === 'author') {
+        this.isValidAuthor();
+      }
+      if (event.target.id === 'cover-link') {
+        const isValid = this.isValidCoverLink();
+        if (isValid) {
+          this.coverImage.src = this.coverLink.value;
+        } else {
+          const currId = this.getBookId();
+          const currBook = this.getBookById(currId);
+          this.coverImage.src = currBook.cover;
+        }
+      }
+      if (event.target.id === 'description') {
+        this.isValidDescription();
+      }
+
+    })
+  }
+
+  /**
+   * Show the book cover image when remove focus from the text input contains cover link
+   */
+  bindShowImage() {
+    this.coverLink.addEventListener('blur', () => {
+      if (this.isImageURL(this.coverLink.value)) {
+        this.coverImage.src = this.coverLink.value;
+      }
+      else {
+        const currId = this.getBookId();
+        const currBook = this.getBookById(currId);
+        this.coverImage.src = currBook.cover;
+      }
+    })
+  }
+
+  /**
+   * Redirect to the home page from the updating book page when click the cancel button
+   */
+  bindCancelUpdateBook() {
+    this.cancelBtn.addEventListener('click', () => {
+      this.redirectHomePage();
+    })
+  }
 
   /**
    * Validate form and get the book information to update book
@@ -293,6 +319,8 @@ export class UpdateBookView {
         }
         const bookId = this.getBookId();
         handleUpdateBook(body, bookId);
+      } else {
+        this.bindValidateFormFields();
       }
     })
   }
