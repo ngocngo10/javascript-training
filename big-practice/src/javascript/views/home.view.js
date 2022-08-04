@@ -40,12 +40,11 @@ export class HomeView {
    */
   removeBook(id) {
     const removedElement = document.getElementById(id);
-    let el = removedElement.nextSibling;
+    let el = removedElement.nextElementSibling;
 
     while (el) {
-      console.log(el);
-      el.firstChild.textContent = parseInt(el.firstChild.textContent) - 1;
-      el = el.nextSibling;
+      el.lastElementChild.innerHTML = parseInt(el.firstChild.innerHTML) - 1;
+      el = el.nextElementSibling;
     }
 
     this.bookList.removeChild(removedElement);

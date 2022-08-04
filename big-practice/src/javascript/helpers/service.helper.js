@@ -16,10 +16,10 @@ export class BookHelper {
       },
     }
     const res = await fetch(process.env.API_HOST + endpoint, options);
-    if (res && !res.ok) {
+    if (!res?.ok) {
       throw new Error(`An error has occured: ${res?.status}`);
     }
-    const result = await res.json();
+    const result = await res?.json();
     return result;
   }
 
@@ -35,8 +35,8 @@ export class BookHelper {
       }
     }
     const res = await fetch(process.env.API_HOST + endpoint, options);
-    if (!res.ok) {
-      throw new Error(`An error has occured: ${res.status}`);
+    if (!res?.ok) {
+      throw new Error(`An error has occured: ${res?.status}`);
     }
   }
 
@@ -55,8 +55,8 @@ export class BookHelper {
       body: requestBody
     }
     const res = await fetch(process.env.API_HOST + endpoint, options);
-    if (!res.ok) {
-      throw new Error(`An error has occured: ${res.status}`);
+    if (!res?.ok) {
+      throw new Error(`An error has occured: ${res?.status}`);
     }
   }
 
@@ -75,9 +75,8 @@ export class BookHelper {
       body: requestBody
     }
     const res = await fetch(process.env.API_HOST + endpoint, options);
-    console.log('res', res);
-    if (!res.ok) {
-      throw new Error(`An error has occured: ${res.status}`);
+    if (!res?.ok) {
+      throw new Error(`An error has occured: ${res?.status}`);
     }
   }
 }

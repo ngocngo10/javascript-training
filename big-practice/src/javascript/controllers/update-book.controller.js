@@ -25,7 +25,7 @@ export class UpdateBookController {
   async handleShowCategories() {
     try {
       const categories = await this.categoryModel.getAllCategories();
-      if (categories.length) this.updateBookView.showCategories(categories);
+      if (categories?.length) this.updateBookView.showCategories(categories);
     } catch (error) {
       console.log(error.message);
       this.alertMess('Get categories was failed.');
