@@ -23,10 +23,11 @@ export class HomeController {
     try {
       const bookList = await this.bookModel.getBookList();
       localStorage.setItem('bookList', JSON.stringify(bookList));
-      if (bookList?.length) {
-        const sortedBook = this.handleSortBooks(bookList);
-        this.homeView.showBookList(sortedBook);
+      let sortedBook = bookList;
+      if (bookList.length) {
+       sortedBook = this.handleSortBooks(bookList);
       }
+      this.homeView.showBookList(sortedBook);
     } catch (error) {
       console.log(error.message);
       this.homeView.alertMess('Get book list was failed!');

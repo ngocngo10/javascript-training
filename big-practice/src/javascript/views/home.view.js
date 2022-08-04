@@ -13,25 +13,33 @@ export class HomeView {
   showBookList(books) {
     let count = 0;
     let bookItemTemplate = '';
-    books.forEach((book) => {
-      count = count + 1;
-      const editIcon = require('../../assets/images/edit-icon.svg');
-      const deleteIcon = require('../../assets/images/delete-icon.svg');
-      bookItemTemplate += `                   
-      <tr id="${book.id}">
-        <td>${count}</td>
-        <td>
-          <a href="javascript:void(0)">
-            <img src="${book.cover}" class="book-cover" alt="Book cover">
-          </a>
-        </td>
-        <td>${book.name}</td>
-        <td>${book.author}</td>
-        <td><button> <img src="${editIcon}" alt="Edit Icon" class="edit-btn__img"></a></button></td>
-        <td><button><img src="${deleteIcon}" alt="Delete Icon" class="delete-btn__img" data-toggle="modal" data-target="#delete-modal"></button></td>
-    </tr>`
-      this.bookList.innerHTML = bookItemTemplate;
-    })
+    if(books.length) {
+      books.forEach((book) => {
+        count = count + 1;
+        const editIcon = require('../../assets/images/edit-icon.svg');
+        const deleteIcon = require('../../assets/images/delete-icon.svg');
+        bookItemTemplate += `                   
+        <tr id="${book.id}">
+          <td>${count}</td>
+          <td>
+            <a href="javascript:void(0)">
+              <img src="${book.cover}" class="book-cover" alt="Book cover">
+            </a>
+          </td>
+          <td>${book.name}</td>
+          <td>${book.author}</td>
+          <td><button> <img src="${editIcon}" alt="Edit Icon" class="edit-btn__img"></a></button></td>
+          <td><button><img src="${deleteIcon}" alt="Delete Icon" class="delete-btn__img" data-toggle="modal" data-target="#delete-modal"></button></td>
+      </tr>`
+        this.bookList.innerHTML = bookItemTemplate;
+      })
+    } else {
+      const p = document.createElement('p');
+      p.innerHTML = 'No records found.';
+      this.bookList.appendChild(p);
+
+    }
+
   }
 
   /**
