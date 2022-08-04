@@ -24,12 +24,18 @@ export class HomeController {
       const bookList = await this.bookModel.getBookList();
       localStorage.setItem('bookList', JSON.stringify(bookList));
       if (bookList.length) {
-        this.homeView.showBookList(bookList);
+        const sortedBook = this.handleSortBooks(bookList);
+        this.homeView.showBookList(sortedBook);
       }
     } catch (error) {
       console.log(error.message);
       this.homeView.alertMess('Get book list was failed!');
     }
+  }
+
+  handleSortBooks(books) {
+    books.sort((book1, book2) => new Date(book2.createAt) - new Date(book1.createAt));
+    return books;
   }
 
   /**

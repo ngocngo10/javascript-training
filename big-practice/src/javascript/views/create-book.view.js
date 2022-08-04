@@ -278,7 +278,8 @@ export class CreateBookView {
           author: this.author.value,
           cover: this.coverLink.value,
           category: this.category.value,
-          description: this.description.value
+          description: this.description.value,
+          createAt: (new Date()).valueOf(),
         }
         handleCreateBook(body);
       } else {
