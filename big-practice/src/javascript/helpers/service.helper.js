@@ -3,18 +3,18 @@ require('dotenv').config();
 export class BookHelper {
   constructor() { }
 
-  /**
-   * Uses endpoint to get data by GET method
-   * @param {string} endpoint 
-   * @returns book list
-   */
-  async getRequest(endpoint) {
+  async request(endpoint, method = "GET", body) {
     const options = {
-      method: 'GET',
+      method,
       headers: {
-        'Content-Type': 'application/json',
+        'Content-type': 'application/json',
       },
+    };
+
+    if (method === 'POST' || method === 'PUT') {
+      options.body = JSON.stringify(body);
     }
+
     const res = await fetch(process.env.API_HOST + endpoint, options);
     if (!res?.ok) {
       throw new Error(`An error has occured: ${res?.status}`);
@@ -24,20 +24,20 @@ export class BookHelper {
   }
 
   /**
+   * Uses endpoint to get data by GET method
+   * @param {string} endpoint 
+   * @returns book list
+   */
+  async getRequest(endpoint) {
+    return this.request(endpoint);
+  }
+
+  /**
    * Use endpoint to delete data by DETELE method
    * @param {string} endpoint 
    */
   async deleteRequest(endpoint) {
-    const options = {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    }
-    const res = await fetch(process.env.API_HOST + endpoint, options);
-    if (!res?.ok) {
-      throw new Error(`An error has occured: ${res?.status}`);
-    }
+    return this.request(endpoint, 'DELETE');
   }
 
   /**
@@ -46,18 +46,7 @@ export class BookHelper {
    * @param {object} body 
    */
   async createRequest(endpoint, body) {
-    const requestBody = JSON.stringify(body);
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: requestBody
-    }
-    const res = await fetch(process.env.API_HOST + endpoint, options);
-    if (!res?.ok) {
-      throw new Error(`An error has occured: ${res?.status}`);
-    }
+    return this.request(endpoint, 'POST', body);
   }
 
   /**
@@ -66,17 +55,6 @@ export class BookHelper {
    * @param {object} body 
    */
   async updateRequest(endpoint, body) {
-    const requestBody = JSON.stringify(body);
-    const options = {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: requestBody
-    }
-    const res = await fetch(process.env.API_HOST + endpoint, options);
-    if (!res?.ok) {
-      throw new Error(`An error has occured: ${res?.status}`);
-    }
+    return this.request(endpoint, 'PUT', body);
   }
 }

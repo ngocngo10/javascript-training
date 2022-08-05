@@ -35,7 +35,7 @@ export class HomeController {
   }
 
   handleSortBooks(books) {
-    books.sort((book1, book2) => new Date(book2.createAt) - new Date(book1.createAt));
+    books.sort((book1, book2) => book2.createAt - book1.createAt);
     return books;
   }
 
