@@ -13,7 +13,7 @@ export class HomeView {
   showBookList(books) {
     let count = 0;
     let bookItemTemplate = '';
-    if(books.length) {
+    if (books.length) {
       books.forEach((book) => {
         count = count + 1;
         const editIcon = require('../../assets/images/edit-icon.svg');
@@ -34,10 +34,12 @@ export class HomeView {
         this.bookList.innerHTML = bookItemTemplate;
       })
     } else {
-      const p = document.createElement('p');
-      p.innerHTML = 'No records found.';
-      this.bookList.appendChild(p);
-
+      const tr = document.createElement('tr');
+      const td = document.createElement('td');
+      td.colSpan = 6;
+      td.innerHTML = 'No records found';
+      tr.appendChild(td);
+      this.bookList.appendChild(tr);
     }
 
   }
