@@ -3,13 +3,20 @@ require('dotenv').config();
 export class BookHelper {
   constructor() { }
 
-  async request(endpoint, method = "GET", body) {
+  /**
+   *  Function uses endpoint, body (optional) and method to return the requested  result by the user
+   * @param {string} endpoint 
+   * @param {string} method 
+   * @param {object} body 
+   * @returns 
+   */
+  async request(endpoint, method = 'GET', body) {
     const options = {
       method,
       headers: {
         'Content-type': 'application/json',
-      },
-    };
+      }
+    }
 
     if (method === 'POST' || method === 'PUT') {
       options.body = JSON.stringify(body);
@@ -26,7 +33,7 @@ export class BookHelper {
   /**
    * Uses endpoint to get data by GET method
    * @param {string} endpoint 
-   * @returns book list
+   * @returns data
    */
   async getRequest(endpoint) {
     return this.request(endpoint);

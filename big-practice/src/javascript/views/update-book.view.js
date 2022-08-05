@@ -46,7 +46,7 @@ export class UpdateBookView {
       this.bookName.value = book.name;
       this.author.value = book.author;
       this.coverLink.value = book.cover;
-      this.category.value = parseInt(book.category);
+      this.category.value = book.category;
       this.description.value = book.description;
       this.coverImage.src = book.cover;
     }
@@ -64,6 +64,11 @@ export class UpdateBookView {
         categoryItem.innerText = category.categoryName;
         this.category.appendChild(categoryItem);
       })
+    } else {
+      const option = document.createElement('option');
+      option.value = 'none';
+      option.innerText = 'Not categories found.';
+      this.category.appendChild(option);
     }
   }
 

@@ -23,12 +23,19 @@ export class CreateBookView {
    * @param {array} categories 
    */
   showCategories(categories) {
-    categories.forEach((category) => {
-      const categoryItem = document.createElement('option');
-      categoryItem.value = category.id;
-      categoryItem.innerText = category.categoryName;
-      this.category.appendChild(categoryItem);
-    })
+    if (categories.length) {
+      categories.forEach((category) => {
+        const categoryItem = document.createElement('option');
+        categoryItem.value = category.id;
+        categoryItem.innerText = category.categoryName;
+        this.category.appendChild(categoryItem);
+      })
+    } else {
+      const option = document.createElement('option');
+      option.value = 'none';
+      option.innerText = 'Not categories found.';
+      this.category.appendChild(option);
+    }
   }
 
   /**

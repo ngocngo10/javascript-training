@@ -11,7 +11,7 @@ export class UpdateBookController {
    * Attaching event handlers to specified elements on the updating book page
    */
   async init() {
-    this.handleShowCategories();
+    await this.handleShowCategories();
     this.handleShowBook();
     this.updateBookView.bindCancelUpdateBook();
     this.updateBookView.bindUpdateBook(this.handleUpdateBook.bind(this));
@@ -25,7 +25,7 @@ export class UpdateBookController {
   async handleShowCategories() {
     try {
       const categories = await this.categoryModel.getAllCategories();
-      if (categories?.length) this.updateBookView.showCategories(categories);
+      this.updateBookView.showCategories(categories);
     } catch (error) {
       console.log(error.message);
       this.alertMess('Get categories was failed.');
