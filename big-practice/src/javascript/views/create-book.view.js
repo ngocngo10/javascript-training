@@ -23,6 +23,7 @@ export class CreateBookView {
    * @param {array} categories 
    */
   showCategories(categories) {
+    this.category.classList.toggle('spinner-border');
     if (categories.length) {
       categories.forEach((category) => {
         const categoryItem = document.createElement('option');

@@ -34,6 +34,12 @@
   color: #566787;
 }
 
+.spinner-border {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
 .table__header {
   background-color: #26D7AC;
   font-family: 'Roboto Medium';

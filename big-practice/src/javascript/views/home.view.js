@@ -13,6 +13,7 @@ export class HomeView {
   showBookList(books) {
     let count = 0;
     let bookItemTemplate = '';
+    this.bookList.classList.toggle('spinner-border');
     if (books.length) {
       books.forEach((book) => {
         count = count + 1;
