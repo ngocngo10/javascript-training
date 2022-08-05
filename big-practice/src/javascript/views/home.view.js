@@ -51,7 +51,7 @@ export class HomeView {
     let el = removedElement.nextElementSibling;
 
     while (el) {
-      el.lastElementChild.innerHTML = parseInt(el.firstChild.innerHTML) - 1;
+      el.firstElementChild.innerHTML = parseInt(el.firstElementChild.innerHTML) - 1;
       el = el.nextElementSibling;
     }
 
