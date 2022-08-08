@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>DOcument Object Model ---- DOM</h2>
+  <div id="main">
+    <p>Finding HTML Elements by Tag Name</p>
+    <p>This example demonstrates the <b>getElementsByTagName</b> method.</p>
+  </div>
+  <p id="intro" class="intro">Finding HTML Elements by Id</p>
+  <p>This example demonstrates the <b>getElementsById</b> method.</p>
+  <p id="demo"></p>
+  <form id="frm1" action="/action_page.php" onsubmit="validateForm()">
+    First name: <input type="text" name="fname" value="Donald"><br>
+    Last name: <input type="text" name="lname" value="Duck"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+  <p id="test" class="test">HIHI</p>
+
+  <script>
+    const element = document.getElementById("intro");
+    console.log('Hihi', element);
+    document.getElementById("demo").innerHTML = "Hello World!";
+    const x = document.getElementById("main");
+    console.log('x', x);
+    const y = x.getElementsByTagName("p");
+    console.log('y', y);
+    document.getElementById("demo").innerHTML =
+      'The first paragraph (index 0) inside "main" is: ' + y[0].innerHTML;
+    const z = document.getElementsByClassName("intro");
+    console.log('z', z);
+    for (let i = 0; i < z.length; i++) {
+      console.log('Hello', z[i]);
+    }
+    const t = document.querySelector("p");
+    console.log('t', t);
+    const m = document.querySelectorAll("p.intro");
+    console.log('haha', m);
+    const n = document.forms["frm1"];
+    console.log('n', n);
+    let text = '';
+    for (let i = 0; i < n.length; i++) {
+      text += n[i].value + "<br>";
+    }
+    console.log('text', text);
+    document.getElementById("test").textContent = "Hello";
+    document.getElementById("test").innerHTML = "Change Test";
+
+    function validateForm() {
+      const n = document.forms["frm1"];
+      let text = '';
+      for (let i = 0; i < n.length; i++) {
+        if (n[i].value === '') alert('Ban can nhap vao input!');
+        return false;
+      }
+    }
+  </script>
+</body>
+
+</html>
