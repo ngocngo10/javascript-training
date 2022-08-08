@@ -10,8 +10,7 @@ export class CreateBookController {
    * Show categories after call API
    * Attaching event handlers to specified elements on the create book page
    */
-
-  async init() {
+  init() {
     this.handleShowCategories();
     this.createBookView.bindCreateBook(this.handleCreateBook.bind(this));
     this.createBookView.bindShowImage();
@@ -23,22 +22,25 @@ export class CreateBookController {
    * Show the categories to the creating book page
    */
   async handleShowCategories() {
-    const categories = await this.categoryModel.getAllCategories();
-    if (!categories) this.alertMess('Get categories was failed.');
-    if (categories.length) this.createBookView.showCategories(categories);
+    try {
+      let categories = await this.categoryModel.getAllCategories();
+      this.createBookView.showCategories(categories);
+    } catch (error) {
+      console.log(error.message);
+      this.alertMess('Get categories was failed.');
+    }
   }
 
   /**
    * Use body from the creating book view to call the book model for create book
    * @param {object} body 
    */
-
   async handleCreateBook(body) {
-    const res = await this.bookModel.createBook(body);
-    if (res) {
+    try {
+      await this.bookModel.createBook(body);
       this.createBookView.redirectHomePage();
-    }
-    else {
+    } catch (error) {
+      console.log(error.message);
       this.createBookView.alertMess('Creating book was failed.');
     }
   }

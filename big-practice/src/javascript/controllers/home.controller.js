@@ -9,7 +9,7 @@ export class HomeController {
   * Show book list after call API
   * Attaching event handlers to specified elements on the home page
   */
-  async init() {
+  init() {
     this.handleShowBooks();
     this.homeView.bindBookActions();
     this.homeView.bindConfirmDeleteBook(this.handleConfirmDeleteBook.bind(this));
@@ -20,14 +20,23 @@ export class HomeController {
    * Show all books to the home page
    */
   async handleShowBooks() {
-    const bookList = await this.bookModel.getBookList();
-    if (!bookList) {
+    try {
+      const bookList = await this.bookModel.getBookList();
+      localStorage.setItem('bookList', JSON.stringify(bookList));
+      let sortedBook = bookList;
+      if (bookList.length) {
+       sortedBook = this.handleSortBooks(bookList);
+      }
+      this.homeView.showBookList(sortedBook);
+    } catch (error) {
+      console.log(error.message);
       this.homeView.alertMess('Get book list was failed!');
     }
+  }
 
-    if (bookList.length) {
-      this.homeView.showBookList(bookList);
-    }
+  handleSortBooks(books) {
+    books.sort((book1, book2) => book2.createAt - book1.createAt);
+    return books;
   }
 
   /**
@@ -37,10 +46,11 @@ export class HomeController {
    * @param {string} id 
    */
   async handleConfirmDeleteBook(id) {
-    const res = await this.bookModel.deleteBook(id);
-    if (res) {
+    try {
+      await this.bookModel.deleteBook(id);
       this.homeView.removeBook(id);
-    } else {
+    } catch (error) {
+      console.log(error.message);
       this.homeView.alertMess('Delete book was failed!');
     }
   }

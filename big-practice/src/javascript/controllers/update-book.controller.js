@@ -11,7 +11,7 @@ export class UpdateBookController {
    * Attaching event handlers to specified elements on the updating book page
    */
   async init() {
-    this.handleShowCategories();
+    await this.handleShowCategories();
     this.handleShowBook();
     this.updateBookView.bindCancelUpdateBook();
     this.updateBookView.bindUpdateBook(this.handleUpdateBook.bind(this));
@@ -23,13 +23,17 @@ export class UpdateBookController {
    * Show the categories to the creating book page
    */
   async handleShowCategories() {
-    const categories = await this.categoryModel.getAllCategories();
-    this.updateBookView.showCategories(categories);
+    try {
+      const categories = await this.categoryModel.getAllCategories();
+      this.updateBookView.showCategories(categories);
+    } catch (error) {
+      console.log(error.message);
+      this.alertMess('Get categories was failed.');
+    }
   }
 
   /**
-   * Get book which is updated from the updating book view
-   * Show book information after call API ftom the book model
+   * Show book information
    */
   handleShowBook() {
     const book = this.updateBookView.getBookById();
@@ -48,10 +52,11 @@ export class UpdateBookController {
    * @param {string} bookId 
    */
   async handleUpdateBook(body, bookId) {
-    const res = await this.bookModel.updateBook(body, bookId);
-    if (res) {
+    try {
+      await this.bookModel.updateBook(body, bookId);
       this.updateBookView.redirectHomePage();
-    } else {
+    } catch (error) {
+      console.log(error.message);
       this.updateBookView.alertMess('Update book failed!');
     }
   }

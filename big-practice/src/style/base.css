@@ -72,4 +72,5 @@ button {
 .layout-col-main {
   min-height: 100vh;
   width: 75%;
+  position: relative;
 }
