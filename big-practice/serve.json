@@ -6,7 +6,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/create-book",
+      "source": "/create-book.html",
       "destination": "/create-book.html"
     },
     {

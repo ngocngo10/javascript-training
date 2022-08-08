@@ -80,7 +80,7 @@ export class HomeView {
       }
       if (event.target.className == 'edit-btn__img') {
         const bookId = event.target.parentElement.parentElement.parentElement.id;
-        window.location.href = `/update-book?id=${bookId}`;
+        window.location.href = `/update-book.html?id=${bookId}`;
       }
     })
   }
