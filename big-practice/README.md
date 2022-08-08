@@ -76,7 +76,7 @@ npm run dev
 - Open browser with the link below
 
 ```
-http://localhost:3000
+http://localhost:1234
 ```
 
 ## Author
