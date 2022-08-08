@@ -47,7 +47,7 @@
 
 .form-content__right {
   flex: 2;
-  padding-right: 100px;
+  padding-right: 50px;
 }
 
 .form-label--create {
@@ -98,6 +98,6 @@
 .form-buttons {
   display: flex;
   justify-content: space-between;
-  width: 300px;
+  width: 200px;
   margin: 0 auto;
 }

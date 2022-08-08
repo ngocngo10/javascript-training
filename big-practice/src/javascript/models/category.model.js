@@ -1,4 +1,4 @@
-import { BookHelper } from '../helpers/book.helper';
+import { BookHelper } from '../helpers/service.helper';
 export class CategoryModel {
   constructor() {
     this.bookHelper = new BookHelper();
@@ -9,12 +9,7 @@ export class CategoryModel {
    * @returns {array} categories
    */
   async getAllCategories() {
-    try {
-      const categories = await this.bookHelper.getRequest(`/categories`);
-      return categories;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+    const categories = await this.bookHelper.getRequest(`/categories`);
+    return categories;
   }
 }
