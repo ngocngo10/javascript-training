@@ -1,7 +1,7 @@
 # JAVASCRIPT-TRAINING
 
 ## OVERVIEW
-- time line: 3 weeks
+- Time line: 3 weeks
     - 1 week for “JavaScript Beginner’s Handbook” ebook
     - 4 days for DOM manipulation
     - 6 days practice in total
